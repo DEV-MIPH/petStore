@@ -1,0 +1,53 @@
+<div class="container my-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6 col-lg-4">
+      <div class="card shadow-lg">
+        <div class="card-body p-5">
+          <div class="text-center mb-4">
+            <i class="fas fa-user-circle fa-3x text-primary mb-3"></i>
+            <h2 class="card-title">Iniciar Sesión</h2>
+            <p class="text-muted">Accede a tu cuenta</p>
+          </div>
+
+          <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+            <div class="mb-3">
+              <label class="form-label">
+                <i class="fas fa-envelope"></i> Correo electrónico
+              </label>
+              <input type="email" 
+                     class="form-control" 
+                     [(ngModel)]="email" 
+                     name="email"
+                     placeholder="ejemplo@correo.com"
+                     required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">
+                <i class="fas fa-lock"></i> Contraseña
+              </label>
+              <input type="password" 
+                     class="form-control" 
+                     [(ngModel)]="password" 
+                     name="password"
+                     placeholder="Tu contraseña"
+                     required>
+            </div>
+            <button type="submit" 
+                    class="btn btn-primary w-100 mb-3" 
+                    [disabled]="loading">
+              <i class="fas fa-sign-in-alt" *ngIf="!loading"></i>
+              <div class="spinner-border spinner-border-sm" *ngIf="loading"></div>
+              {{ loading ? 'Ingresando...' : 'Ingresar' }}
+            </button>
+          </form>
+
+          <div class="text-center">
+            <p class="mb-0">¿No tienes cuenta?
+              <a routerLink="/registro" class="text-decoration-none">Regístrate aquí</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> 

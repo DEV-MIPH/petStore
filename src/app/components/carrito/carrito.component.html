@@ -1,0 +1,61 @@
+<div class="container my-4">
+  <h2 class="section-title">
+    <i class="fas fa-shopping-cart"></i> Tu Carrito
+  </h2>
+
+  <div class="loading" *ngIf="loading">
+    <div class="spinner"></div>
+  </div>
+
+  <div *ngIf="!loading">
+    <div *ngIf="carritoItems.length === 0" class="empty-cart">
+      <i class="fas fa-shopping-cart"></i>
+      <h3>Tu carrito está vacío</h3>
+      <p>Agrega algunos productos para comenzar a comprar</p>
+      <a routerLink="/" class="btn btn-primary">
+        <i class="fas fa-home"></i> Ir a productos
+      </a>
+    </div>
+
+    <div *ngIf="carritoItems.length > 0">
+      <div class="cart-item" *ngFor="let item of carritoItems">
+        <img [src]="item.producto.imagen" 
+             [alt]="item.producto.nombre"
+             (error)="onImageError($event)">
+        <div class="cart-item-details">
+          <h5 class="cart-item-title">{{ item.producto.nombre }}</h5>
+          <p class="cart-item-price">${{ item.producto.precio.toLocaleString() }}</p>
+        </div>
+        <div class="cart-item-actions">
+          <div class="quantity-control">
+            <button class="quantity-btn" 
+                    (click)="actualizarCantidad(item.producto.id, item.cantidad - 1)">
+              <i class="fas fa-minus"></i>
+            </button>
+            <span class="quantity-display">{{ item.cantidad }}</span>
+            <button class="quantity-btn" 
+                    (click)="actualizarCantidad(item.producto.id, item.cantidad + 1)">
+              <i class="fas fa-plus"></i>
+            </button>
+          </div>
+          <button class="btn btn-danger btn-sm" 
+                  (click)="removerProducto(item.producto.id)">
+            <i class="fas fa-trash"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="cart-summary">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h4>Total: ${{ total.toLocaleString() }}</h4>
+          <button class="btn btn-outline-danger" (click)="limpiarCarrito()">
+            <i class="fas fa-trash"></i> Limpiar carrito
+          </button>
+        </div>
+        <button class="btn btn-primary btn-lg w-100">
+          <i class="fas fa-credit-card"></i> Proceder al pago
+        </button>
+      </div>
+    </div>
+  </div>
+</div> 

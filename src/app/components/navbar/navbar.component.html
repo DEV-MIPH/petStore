@@ -1,0 +1,21 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <div class="container">
+    <a class="navbar-brand" routerLink="/">
+      <i class="fas fa-paw"></i> PetShop
+    </a>
+    <ul class="navbar-nav ms-auto">
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Inicio</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/carrito" routerLinkActive="active">Carrito</a>
+      </li>
+      <li class="nav-item" *ngIf="!authService.estaAutenticado()">
+        <a class="nav-link" routerLink="/login" routerLinkActive="active">Login</a>
+      </li>
+      <li class="nav-item" *ngIf="authService.estaAutenticado()">
+        <a class="nav-link" (click)="logout()">Cerrar sesión</a>
+      </li>
+    </ul>
+  </div>
+</nav> 
